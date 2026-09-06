@@ -1,0 +1,93 @@
+00:00 +0: loading /Users/apple/StudioProjects/dhamu-portfolio/test/widget_test.dart                                                                                                                    00:01 +0: loading /Users/apple/StudioProjects/dhamu-portfolio/test/widget_test.dart                                                                                                                    00:01 +0: Mobile Viewport (375x812) — All 17 Routes & Case Studies                                                                                                                                     00:02 +0: Mobile Viewport (375x812) — All 17 Routes & Case Studies                                                                                                                                     00:02 +0: Mobile Viewport (375x812) — All 17 Routes & Case Studies                                                                                                                                     
+══╡ EXCEPTION CAUGHT BY RENDERING LIBRARY ╞═════════════════════════════════════════════════════════
+The following assertion was thrown during layout:
+A RenderFlex overflowed by 155 pixels on the right.
+
+The overflowing RenderFlex has an orientation of Axis.horizontal.
+The edge of the RenderFlex that is overflowing has been marked in the rendering with a yellow and
+black striped pattern. This is usually caused by the contents being too big for the RenderFlex.
+Consider applying a flex factor (e.g. using an Expanded widget) to force the children of the
+RenderFlex to fit within the available space instead of being sized to their natural size.
+This is considered an error condition because it indicates that there is content that cannot be
+seen. If the content is legitimately bigger than the available space, consider clipping it with a
+ClipRect widget before putting it in the flex, or using a scrollable container rather than a Flex,
+like a ListView.
+The specific RenderFlex in question is: RenderFlex#00200 DISPOSED OVERFLOWING:
+  creator: MultiChildRenderObjectElement#95772(DEFUNCT) ←
+    SingleChildRenderObjectElement#3beed(DEFUNCT) ← SingleChildRenderObjectElement#f7012(DEFUNCT) ←
+    StatelessElement#7e8c6(DEFUNCT) ← SingleChildRenderObjectElement#1abb7(DEFUNCT) ←
+    SingleChildRenderObjectElement#cbcc2(DEFUNCT) ← StatefulElement#0438a(DEFUNCT) ←
+    StatelessElement#4c592(DEFUNCT) ← SingleChildRenderObjectElement#b4d04(DEFUNCT) ←
+    MultiChildRenderObjectElement#7205d(DEFUNCT) ← SingleChildRenderObjectElement#79abb(DEFUNCT) ←
+    SingleChildRenderObjectElement#fb402(DEFUNCT) ← ⋯
+  parentData: offset=Offset(19.0, 11.0) (can use size)
+  constraints: BoxConstraints(0.0<=w<=247.0, 0.0<=h<=Infinity)
+  size: Size(247.0, 20.0)
+  direction: horizontal
+  mainAxisAlignment: start
+  mainAxisSize: min
+  crossAxisAlignment: center
+  textDirection: ltr
+  verticalDirection: down
+  spacing: 0.0
+◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤◢◤
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:02 +0 -1: Mobile Viewport (375x812) — All 17 Routes & Case Studies [E]                                                                                                                              
+  Test failed. See exception logs above.
+  The test description was: Mobile Viewport (375x812) — All 17 Routes & Case Studies
+  
+══╡ EXCEPTION CAUGHT BY WIDGET INSPECTOR ╞══════════════════════════════════════════════════════════
+The following assertion was thrown:
+Looking up a deactivated widget's ancestor is unsafe.
+At this point the state of the widget's element tree is no longer stable.
+To safely refer to a widget's ancestor in its dispose() method, save a reference to the ancestor by
+calling dependOnInheritedWidgetOfExactType() in the widget's didChangeDependencies() method.
+
+When the exception was thrown, this was the stack:
+#0      Element._debugCheckStateIsActiveForAncestorLookup.<anonymous closure> (package:flutter/src/widgets/framework.dart:5049:9)
+#1      Element._debugCheckStateIsActiveForAncestorLookup (package:flutter/src/widgets/framework.dart:5063:6)
+#2      Element.visitAncestorElements (package:flutter/src/widgets/framework.dart:5174:12)
+#3      _describeRelevantUserCode (package:flutter/src/widgets/widget_inspector.dart:4236:13)
+#4      _parseDiagnosticsNode (package:flutter/src/widgets/widget_inspector.dart:4155:12)
+#5      debugTransformDebugCreator (package:flutter/src/widgets/widget_inspector.dart:4134:21)
+#6      _FlutterErrorDetailsNode.builder (package:flutter/src/foundation/assertions.dart:1310:31)
+#7      DiagnosticableNode.getProperties (package:flutter/src/foundation/diagnostics.dart:2943:68)
+#8      TextTreeRenderer._debugRender (package:flutter/src/foundation/diagnostics.dart:1270:63)
+#9      TextTreeRenderer.render (package:flutter/src/foundation/diagnostics.dart:1137:14)
+#10     FlutterError.dumpErrorToConsole (package:flutter/src/foundation/assertions.dart:1040:13)
+#11     _defaultTestExceptionReporter (package:flutter_test/src/test_exception_reporter.dart:29:16)
+#12     TestWidgetsFlutterBinding._createTestCompletionHandler.<anonymous closure> (package:flutter_test/src/binding.dart:1321:28)
+<asynchronous suspension>
+(elided 8 frames from dart:async and package:stack_trace)
+
+This exception was caught while trying to describe the user-relevant code of another error.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+══╡ EXCEPTION CAUGHT BY WIDGET INSPECTOR ╞══════════════════════════════════════════════════════════
+The following assertion was thrown:
+Looking up a deactivated widget's ancestor is unsafe.
+At this point the state of the widget's element tree is no longer stable.
+To safely refer to a widget's ancestor in its dispose() method, save a reference to the ancestor by
+calling dependOnInheritedWidgetOfExactType() in the widget's didChangeDependencies() method.
+
+When the exception was thrown, this was the stack:
+#0      Element._debugCheckStateIsActiveForAncestorLookup.<anonymous closure> (package:flutter/src/widgets/framework.dart:5049:9)
+#1      Element._debugCheckStateIsActiveForAncestorLookup (package:flutter/src/widgets/framework.dart:5063:6)
+#2      Element.visitAncestorElements (package:flutter/src/widgets/framework.dart:5174:12)
+#3      _describeRelevantUserCode (package:flutter/src/widgets/widget_inspector.dart:4236:13)
+#4      _parseDiagnosticsNode (package:flutter/src/widgets/widget_inspector.dart:4155:12)
+#5      debugTransformDebugCreator (package:flutter/src/widgets/widget_inspector.dart:4134:21)
+#6      _FlutterErrorDetailsNode.builder (package:flutter/src/foundation/assertions.dart:1310:31)
+#7      DiagnosticableNode.emptyBodyDescription (package:flutter/src/foundation/diagnostics.dart:2939:45)
+#8      TextTreeRenderer._debugRender (package:flutter/src/foundation/diagnostics.dart:1307:14)
+#9      TextTreeRenderer.render (package:flutter/src/foundation/diagnostics.dart:1137:14)
+#10     FlutterError.dumpErrorToConsole (package:flutter/src/foundation/assertions.dart:1040:13)
+#11     _defaultTestExceptionReporter (package:flutter_test/src/test_exception_reporter.dart:29:16)
+#12     TestWidgetsFlutterBinding._createTestCompletionHandler.<anonymous closure> (package:flutter_test/src/binding.dart:1321:28)
+<asynchronous suspension>
+(elided 8 frames from dart:async and package:stack_trace)
+
+This exception was caught while trying to describe the user-relevant code of another error.
+════════════════════════════════════════════════════════════════════════════════════════════════════
+
+To run this test again: /Users/apple/Development/flutter/bin/cache/dart-sdk/bin/dart test /Users/apple/StudioProjects/dhamu-portfolio/test/widget_test.dart -p vm --plain-name 'Mobile Viewport (375x812) — All 17 Routes & Case Studies'
+00:02 +0 -1: Some tests failed.                                                                                                                                                                        
