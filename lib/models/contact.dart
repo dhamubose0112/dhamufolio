@@ -9,6 +9,7 @@ class ContactInfo {
   final String? gitHubUrl;
   final String? twitterUrl;
   final String? portfolioUrl;
+  final String? resumeUrl;
   final String availabilityStatus;
 
   const ContactInfo({
@@ -21,6 +22,7 @@ class ContactInfo {
     this.gitHubUrl,
     this.twitterUrl,
     this.portfolioUrl,
+    this.resumeUrl,
     this.availabilityStatus = 'Open for Product Design & UI/UX opportunities',
   });
 }

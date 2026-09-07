@@ -1,11 +1,11 @@
 {
-    "name": "dhamu_portfolio",
-    "short_name": "dhamu_portfolio",
+    "name": "Dhamu Bose — UI/UX Designer & Product Designer",
+    "short_name": "Dhamu Bose",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0D0D0E",
+    "theme_color": "#7C3AED",
+    "description": "Personal UI/UX and Product Design portfolio of Dhamu Bose.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

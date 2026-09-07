@@ -13,6 +13,7 @@ class ContactData {
     gitHubUrl: 'https://github.com/dhamubose0112',
     twitterUrl: 'https://x.com/dhamubose01',
     portfolioUrl: null,
+    resumeUrl: null,
     availabilityStatus: 'Open for Product Design & UI/UX opportunities',
   );
 }

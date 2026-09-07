@@ -295,4 +295,45 @@ void main() {
     expect(find.text('Visit Live Website'), findsOneWidget);
     expect(find.text('Design Files Confidential (NDA)'), findsNothing);
   });
+
+  testWidgets('Mobile Viewport Navigation Menu Icon Right Alignment Verification', (tester) async {
+    tester.view.physicalSize = const Size(375, 812);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+
+    await tester.pumpWidget(const DhamuPortfolioApp());
+    await tester.pumpAndSettle();
+
+    // Check menu icon exists
+    final menuFinder = find.byIcon(Icons.menu_rounded);
+    expect(menuFinder, findsOneWidget);
+
+    // Verify it is placed on the far right (x > 300 on a 375-wide screen)
+    final menuTopLeft = tester.getTopLeft(menuFinder);
+    expect(menuTopLeft.dx, greaterThan(300.0));
+
+    // Verify My Resume button is present and placed to the left of the menu icon
+    final resumeFinder = find.text('My Resume');
+    expect(resumeFinder, findsOneWidget);
+    final resumeTopLeft = tester.getTopLeft(resumeFinder);
+    expect(resumeTopLeft.dx, lessThan(menuTopLeft.dx));
+  });
+
+  testWidgets('Desktop Viewport My Resume Button and Location Badge Verification', (tester) async {
+    tester.view.physicalSize = const Size(1280, 800);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+
+    await tester.pumpWidget(const DhamuPortfolioApp());
+    await tester.pumpAndSettle();
+
+    final resumeFinder = find.text('My Resume');
+    final locationFinder = find.text('Bengaluru, IN');
+    expect(resumeFinder, findsOneWidget);
+    expect(locationFinder, findsOneWidget);
+
+    final resumeTopLeft = tester.getTopLeft(resumeFinder);
+    final locationTopLeft = tester.getTopLeft(locationFinder);
+    expect(resumeTopLeft.dx, lessThan(locationTopLeft.dx));
+  });
 }

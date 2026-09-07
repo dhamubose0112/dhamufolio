@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/responsive/responsive_layout.dart';
 import '../../core/theme/app_theme.dart';
+import '../../data/contact/contact_data.dart';
 import '../components/custom_cursor_overlay.dart';
 
 class NavItem {
@@ -66,22 +68,31 @@ class AppNavigationBar extends StatelessWidget {
                 ),
               ),
 
-              // 2. Center: Floating Pill Menu (Desktop) or Hamburger (Mobile)
+              // 2. Navigation items
               if (isCompact)
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppTheme.surfaceRaised,
-                    shape: BoxShape.circle,
-                    border: Border.all(color: AppTheme.border, width: 1.0),
-                    boxShadow: AppTheme.cardShadow,
-                  ),
-                  child: IconButton(
-                    icon: const Icon(Icons.menu_rounded, color: AppTheme.foreground, size: 20.0),
-                    onPressed: () => _openEditorialMobileMenu(context),
-                    tooltip: 'Open navigation menu',
-                  ),
+                // Right: Row of [My Resume Button, Hamburger Menu Icon] on Mobile/Tablet
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const _ResumeButton(isCompact: true),
+                    const SizedBox(width: 10.0),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.surfaceRaised,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: AppTheme.border, width: 1.0),
+                        boxShadow: AppTheme.cardShadow,
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.menu_rounded, color: AppTheme.foreground, size: 20.0),
+                        onPressed: () => _openEditorialMobileMenu(context),
+                        tooltip: 'Open navigation menu',
+                      ),
+                    ),
+                  ],
                 )
-              else
+              else ...[
+                // Center: Floating Pill Menu (Desktop)
                 ClipRRect(
                   borderRadius: BorderRadius.circular(100.0),
                   child: BackdropFilter(
@@ -112,41 +123,46 @@ class AppNavigationBar extends StatelessWidget {
                   ),
                 ),
 
-              // 3. Right: Subtle Location / Availability Badge
-              if (!isCompact)
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 7.0),
-                  decoration: BoxDecoration(
-                    color: AppTheme.surfaceRaised,
-                    borderRadius: BorderRadius.circular(100.0),
-                    border: Border.all(color: AppTheme.border, width: 1.0),
-                    boxShadow: AppTheme.cardShadow,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 7.0,
-                        height: 7.0,
-                        decoration: const BoxDecoration(
-                          color: AppTheme.primary,
-                          shape: BoxShape.circle,
-                        ),
+                // Right: Row of [My Resume Button, Subtle Location Badge]
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const _ResumeButton(isCompact: false),
+                    const SizedBox(width: 8.0),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 6.0),
+                      decoration: BoxDecoration(
+                        color: AppTheme.surfaceRaised,
+                        borderRadius: BorderRadius.circular(100.0),
+                        border: Border.all(color: AppTheme.border, width: 1.0),
+                        boxShadow: AppTheme.cardShadow,
                       ),
-                      const SizedBox(width: 8.0),
-                      Text(
-                        'Bengaluru, IN',
-                        style: AppTheme.caption.copyWith(
-                          fontSize: 11.5,
-                          fontWeight: FontWeight.w600,
-                          color: AppTheme.foregroundMuted,
-                        ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 6.0,
+                            height: 6.0,
+                            decoration: const BoxDecoration(
+                              color: AppTheme.primary,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 6.0),
+                          Text(
+                            'Bengaluru, IN',
+                            style: AppTheme.caption.copyWith(
+                              fontSize: 11.0,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.foregroundMuted,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                )
-              else
-                const SizedBox.shrink(),
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
@@ -319,7 +335,7 @@ class _PillNavItemState extends State<_PillNavItem> {
         onTap: () => context.go(widget.path),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 180),
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 11.0, vertical: 6.5),
           decoration: BoxDecoration(
             color: widget.isActive
                 ? AppTheme.surfaceRaised
@@ -330,12 +346,116 @@ class _PillNavItemState extends State<_PillNavItem> {
           child: Text(
             widget.label,
             style: AppTheme.label.copyWith(
-              fontSize: 13.0,
+              fontSize: 12.5,
               fontWeight: widget.isActive ? FontWeight.w700 : FontWeight.w500,
               color: widget.isActive
                   ? AppTheme.foreground
                   : (_isHovered ? AppTheme.foreground : AppTheme.foregroundMuted),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Pill button for downloading/viewing Dhamu's Resume with download icon.
+class _ResumeButton extends StatefulWidget {
+  final bool isCompact;
+
+  const _ResumeButton({required this.isCompact});
+
+  @override
+  State<_ResumeButton> createState() => _ResumeButtonState();
+}
+
+class _ResumeButtonState extends State<_ResumeButton> {
+  bool _isHovered = false;
+
+  Future<void> _handleResumeTap() async {
+    final resumeUrl = ContactData.info.resumeUrl;
+    if (resumeUrl != null && resumeUrl.isNotEmpty) {
+      final uri = Uri.parse(resumeUrl);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+        return;
+      }
+    }
+
+    // Direct email fallback to request the resume if no static URL is configured yet
+    final emailUri = Uri.parse(
+      'mailto:${ContactData.info.email}?subject=${Uri.encodeComponent('Resume Request — Dhamu Bose')}&body=${Uri.encodeComponent('Hi Dhamu,\n\nI would love to review your latest resume for UI/UX and Product Design opportunities.\n\nBest regards,')}',
+    );
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Contact Dhamu at ${ContactData.info.email} for resume.'),
+          backgroundColor: AppTheme.surfaceRaised,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) {
+        setState(() => _isHovered = true);
+        CursorState.instance.setHovered(true);
+      },
+      onExit: (_) {
+        setState(() => _isHovered = false);
+        CursorState.instance.setHovered(false);
+      },
+      child: GestureDetector(
+        onTap: _handleResumeTap,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          padding: EdgeInsets.symmetric(
+            horizontal: widget.isCompact ? 9.5 : 11.5,
+            vertical: widget.isCompact ? 5.5 : 6.0,
+          ),
+          decoration: BoxDecoration(
+            color: _isHovered
+                ? AppTheme.primary.withValues(alpha: 0.08)
+                : AppTheme.surfaceRaised,
+            borderRadius: BorderRadius.circular(100.0),
+            border: Border.all(
+              color: _isHovered ? AppTheme.primary : AppTheme.border,
+              width: 1.0,
+            ),
+            boxShadow: _isHovered
+                ? [
+                    BoxShadow(
+                      color: AppTheme.primary.withValues(alpha: 0.15),
+                      blurRadius: 10.0,
+                      offset: const Offset(0, 3),
+                    ),
+                  ]
+                : AppTheme.cardShadow,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.download_rounded,
+                size: widget.isCompact ? 14.0 : 15.0,
+                color: _isHovered ? AppTheme.primary : AppTheme.primary,
+              ),
+              const SizedBox(width: 4.0),
+              Text(
+                'My Resume',
+                style: AppTheme.caption.copyWith(
+                  fontSize: widget.isCompact ? 11.0 : 11.5,
+                  fontWeight: FontWeight.w600,
+                  color: _isHovered ? AppTheme.primary : AppTheme.foreground,
+                ),
+              ),
+            ],
           ),
         ),
       ),
