@@ -7,10 +7,11 @@ class ContactData {
   static const ContactInfo info = ContactInfo(
     name: 'Dhamu Bose',
     title: 'UI/UX Designer / Product Designer',
-    email: 'dhamubose2407@gmail.com',
+    email: 'dhamu.bose01@gmail.com',
     location: 'Bengaluru, Karnataka, India',
-    linkedInUrl: 'https://www.linkedin.com/in/dhamubose/',
-    gitHubUrl: 'https://github.com/dhamubose',
+    linkedInUrl: 'https://www.linkedin.com/in/dhamubose01/',
+    gitHubUrl: 'https://github.com/dhamubose0112',
+    twitterUrl: 'https://x.com/dhamubose01',
     portfolioUrl: null,
     availabilityStatus: 'Open for Product Design & UI/UX opportunities',
   );

@@ -73,6 +73,19 @@ flutter:
     - assets/projects/house_of_habytat/
     - assets/projects/sowparnika_cx_app/
     - assets/projects/namma_pookadai/
+    - assets/projects/real_estate_lms/
+    - assets/projects/developer_cx_app/
+    - assets/projects/real_estate_smart_platform/
+    - assets/projects/dubai_real_estate_customer_app/
+    - assets/projects/century_commercial_website/
+    - assets/projects/century_booking_form/
+    - assets/projects/foodcourt_survey/
+    - assets/projects/habytat_academy/
+    - assets/projects/yellowman/
+    - assets/projects/restoo/
+    - assets/projects/wovzo_ops/
+    - assets/projects/saibaba_temple/
+    - assets/cover image/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

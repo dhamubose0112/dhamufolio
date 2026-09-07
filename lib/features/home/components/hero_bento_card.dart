@@ -118,14 +118,14 @@ class HeroBentoCard extends StatelessWidget {
                     ', currently working as a ',
               ),
               TextSpan(
-                text: 'Product Designer / UI/UX Designer',
+                text: 'Product Designer',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   color: AppTheme.primary,
                 ),
               ),
               const TextSpan(
-                text: ' @ Ishtaka Buildmetrix / Sowparnika in Bengaluru.',
+                text: ' @ Ishtaka Buildmetrix in Bengaluru.',
               ),
             ],
           ),
@@ -135,7 +135,7 @@ class HeroBentoCard extends StatelessWidget {
           spacing: 8.0,
           runSpacing: 8.0,
           children: const [
-            _PillBadge(label: 'Enterprise SaaS & Mobile'),
+            _PillBadge(label: 'UI/UX Design'),
             _PillBadge(label: 'Design Systems'),
             _PillBadge(label: '2+ Yrs Exp'),
           ],

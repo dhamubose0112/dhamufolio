@@ -59,7 +59,7 @@ class ExperienceStatsBentoCard extends StatelessWidget {
           ),
           const SizedBox(height: 6.0),
           Text(
-            'Designing complex SaaS & mobile apps at Ishtaka & Sowparnika.',
+            'Designing complex SaaS & mobile apps at Ishtaka Buildmetrix.',
             style: AppTheme.caption.copyWith(
               color: AppTheme.foregroundMuted,
               height: 1.4,

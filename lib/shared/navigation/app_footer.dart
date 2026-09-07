@@ -193,6 +193,25 @@ class AppFooter extends StatelessWidget {
               ),
             ),
           ),
+        if (contact.twitterUrl != null)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: InkWell(
+              onTap: () => _launchUrl(contact.twitterUrl!),
+              child: const Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 4.0,
+                children: [
+                  Text('Twitter / X', style: AppTheme.bodySmall),
+                  Icon(
+                    Icons.arrow_outward,
+                    size: 12.0,
+                    color: AppTheme.foregroundMuted,
+                  ),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }

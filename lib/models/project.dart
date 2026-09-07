@@ -26,6 +26,7 @@ class Project {
   final List<String> tags;
   final bool featured;
   final bool caseStudyAvailable;
+  final bool? isConfidential;
   final String? externalUrl;
   final String? verifiedOutcome;
   final List<CaseStudySection> sections;
@@ -49,10 +50,17 @@ class Project {
     this.tags = const [],
     this.featured = false,
     this.caseStudyAvailable = false,
+    this.isConfidential,
     this.externalUrl,
     this.verifiedOutcome,
     this.sections = const [],
   });
+
+  /// Whether design files for this project are confidential under NDA.
+  bool get isDesignConfidential =>
+      isConfidential ??
+      (category == ProjectCategory.professional &&
+          (externalUrl == null || externalUrl!.trim().isEmpty));
 
   /// Human-readable category label adhering to naming guidelines.
   String get categoryLabel {

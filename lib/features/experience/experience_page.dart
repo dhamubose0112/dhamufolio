@@ -86,9 +86,9 @@ class ExperiencePage extends StatelessWidget {
           // 2-Column Responsive Bento Grid for Product Experience
           _buildExperienceBentoGrid(productExperiences, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 03 — CREATIVE DOMAIN EXPERIENCE (2-COLUMN GRID)
@@ -120,9 +120,9 @@ class ExperiencePage extends StatelessWidget {
           // 2-Column Responsive Bento Grid for Creative Experience
           _buildExperienceBentoGrid(creativeExperiences, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 04 — PROFESSIONAL FOCUS & VIEW SELECTED WORK

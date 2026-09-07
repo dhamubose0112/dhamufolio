@@ -81,9 +81,9 @@ class WorkPage extends StatelessWidget {
           // 2-Column Square Bento Grid for Professional Work
           _buildProjectBentoGrid(professionalProjects, isMobile, prefix: '0'),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // SECTION 2: INDEPENDENT & FREELANCE PROJECTS (2-COLUMN GRID)

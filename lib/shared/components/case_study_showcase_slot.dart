@@ -58,7 +58,6 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
           _buildRealImageFrame(
             imagePath: images.first,
             altText: '$title overview screenshot',
-            aspectRatio: isMobile ? 16 / 10 : 21 / 9,
           )
         else
           _buildPlaceholderCanvas(
@@ -102,13 +101,13 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
           _buildRealImageFrame(
             imagePath: images[0],
             altText: '$title primary view',
-            aspectRatio: 16 / 10,
+            aspectRatio: 16 / 9,
           ),
           const SizedBox(height: 16.0),
           _buildRealImageFrame(
             imagePath: images[1],
             altText: '$title detail view',
-            aspectRatio: 16 / 10,
+            aspectRatio: 16 / 9,
           ),
           if (caption != null) ...[
             const SizedBox(height: 12.0),
@@ -127,7 +126,7 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
               child: _buildRealImageFrame(
                 imagePath: images[0],
                 altText: '$title primary view',
-                aspectRatio: 16 / 10,
+                aspectRatio: 16 / 9,
               ),
             ),
             const SizedBox(width: 16.0),
@@ -135,7 +134,7 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
               child: _buildRealImageFrame(
                 imagePath: images[1],
                 altText: '$title detail view',
-                aspectRatio: 16 / 10,
+                aspectRatio: 16 / 9,
               ),
             ),
           ],
@@ -265,13 +264,13 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
           _buildRealImageFrame(
             imagePath: images[0],
             altText: '$title primary showcase',
-            aspectRatio: 16 / 10,
+            aspectRatio: 16 / 9,
           ),
           const SizedBox(height: 12.0),
           _buildRealImageFrame(
             imagePath: images[1],
             altText: '$title secondary detail',
-            aspectRatio: 16 / 10,
+            aspectRatio: 16 / 9,
           ),
           if (caption != null) ...[
             const SizedBox(height: 12.0),
@@ -292,7 +291,7 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
               child: _buildRealImageFrame(
                 imagePath: images[0],
                 altText: '$title primary showcase',
-                aspectRatio: 16 / 10,
+                aspectRatio: 16 / 9,
               ),
             ),
             const SizedBox(width: 16.0),
@@ -303,14 +302,14 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
                   _buildRealImageFrame(
                     imagePath: images[1],
                     altText: '$title secondary detail',
-                    aspectRatio: 16 / 10,
+                    aspectRatio: 16 / 9,
                   ),
                   if (images.length >= 3) ...[
                     const SizedBox(height: 16.0),
                     _buildRealImageFrame(
                       imagePath: images[2],
                       altText: '$title tertiary detail',
-                      aspectRatio: 16 / 10,
+                      aspectRatio: 16 / 9,
                     ),
                   ],
                 ],
@@ -330,32 +329,47 @@ class CaseStudyShowcaseSlot extends StatelessWidget {
   Widget _buildRealImageFrame({
     required String imagePath,
     required String altText,
-    required double aspectRatio,
+    double? aspectRatio,
   }) {
     return Semantics(
       label: altText,
       image: true,
       child: Container(
+        width: double.infinity,
         decoration: BoxDecoration(
-          color: AppTheme.surface,
+          color: const Color(0xFFF4F2EC),
           borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
           border: Border.all(color: AppTheme.border, width: 1.0),
         ),
         clipBehavior: Clip.antiAlias,
-        child: AspectRatio(
-          aspectRatio: aspectRatio,
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return _buildPlaceholderCanvas(
-                height: 120.0,
-                label: '$title — Asset not found',
-                icon: Icons.broken_image_outlined,
-              );
-            },
-          ),
-        ),
+        child: aspectRatio != null
+            ? AspectRatio(
+                aspectRatio: aspectRatio,
+                child: Image.asset(
+                  imagePath,
+                  width: double.infinity,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return _buildPlaceholderCanvas(
+                      height: 120.0,
+                      label: '$title — Asset not found',
+                      icon: Icons.broken_image_outlined,
+                    );
+                  },
+                ),
+              )
+            : Image.asset(
+                imagePath,
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+                errorBuilder: (context, error, stackTrace) {
+                  return _buildPlaceholderCanvas(
+                    height: 120.0,
+                    label: '$title — Asset not found',
+                    icon: Icons.broken_image_outlined,
+                  );
+                },
+              ),
       ),
     );
   }

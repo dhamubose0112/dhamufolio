@@ -45,43 +45,43 @@ class AboutPage extends StatelessWidget {
               style: isMobile ? AppTheme.display : AppTheme.editorialHero,
             ),
           ),
-          const SizedBox(height: 36.0),
+          SizedBox(height: sectionGap),
 
           // -----------------------------------------------------------
           // 02 — PROFILE (Uniform Bento Cards with dhamu_color_pop.png)
           // -----------------------------------------------------------
           _buildProfileSection(context, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 03 — HOW I THINK ABOUT DESIGN (3-Column Square Bento Grid)
           // -----------------------------------------------------------
           _buildHowIThinkSection(context, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 04 — CREATIVE DISCIPLINES (2-Column Square Bento Grid)
           // -----------------------------------------------------------
           _buildCreativeDisciplinesSection(isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 05 — CURRENT ROLE & 06 — TOOLS (Uniform Bento Layout)
           // -----------------------------------------------------------
           _buildCurrentRoleSection(context, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           _buildToolsWorkingAreasSection(isMobile),
 

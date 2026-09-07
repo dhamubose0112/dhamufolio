@@ -127,6 +127,34 @@ class _EditorialProjectShowcaseState extends State<EditorialProjectShowcase> {
                         ),
                       ),
                     ),
+                  if (project.isDesignConfidential)
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 9.0, vertical: 4.0),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF2EFEB),
+                        borderRadius: BorderRadius.circular(100.0),
+                        border: Border.all(color: AppTheme.border, width: 0.8),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.lock_outline_rounded,
+                            size: 10.5,
+                            color: AppTheme.foregroundSubtle,
+                          ),
+                          const SizedBox(width: 4.0),
+                          Text(
+                            'Confidential',
+                            style: AppTheme.caption.copyWith(
+                              fontSize: 10.0,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.foregroundSubtle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                 ],
               ),
 
@@ -224,14 +252,12 @@ class _EditorialProjectShowcaseState extends State<EditorialProjectShowcase> {
 
   Widget _buildVisualPreview(Project project, bool isMobile) {
     final imgPath = project.thumbnail ?? project.heroImage!;
-    final height = isMobile ? 180.0 : 220.0;
 
     return Semantics(
       label: '${project.shortTitle} preview visual',
       image: true,
       child: Container(
         width: double.infinity,
-        height: height,
         decoration: BoxDecoration(
           color: const Color(0xFFF4F2EC),
           borderRadius: BorderRadius.circular(20.0),
@@ -244,11 +270,11 @@ class _EditorialProjectShowcaseState extends State<EditorialProjectShowcase> {
           curve: Curves.easeOutCubic,
           child: Image.asset(
             imgPath,
-            fit: BoxFit.cover,
+            width: double.infinity,
+            fit: BoxFit.fitWidth,
             errorBuilder: (context, error, stackTrace) => ImagePlaceholder(
               label: '${project.shortTitle} — Preview',
               caption: 'Visual asset loading',
-              height: height,
             ),
           ),
         ),

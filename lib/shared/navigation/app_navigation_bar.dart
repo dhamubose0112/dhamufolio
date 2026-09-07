@@ -226,7 +226,7 @@ class AppNavigationBar extends StatelessWidget {
                   ),
                   const SizedBox(height: 6.0),
                   Text(
-                    'Bengaluru, India • bosedhamu@gmail.com',
+                    'Bengaluru, India • dhamu.bose01@gmail.com',
                     style: AppTheme.caption.copyWith(color: AppTheme.foregroundMuted),
                   ),
                   const SizedBox(height: 12.0),

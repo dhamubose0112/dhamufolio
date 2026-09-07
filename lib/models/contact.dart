@@ -7,6 +7,7 @@ class ContactInfo {
   final String location;
   final String? linkedInUrl;
   final String? gitHubUrl;
+  final String? twitterUrl;
   final String? portfolioUrl;
   final String availabilityStatus;
 
@@ -18,6 +19,7 @@ class ContactInfo {
     required this.location,
     this.linkedInUrl,
     this.gitHubUrl,
+    this.twitterUrl,
     this.portfolioUrl,
     this.availabilityStatus = 'Open for Product Design & UI/UX opportunities',
   });

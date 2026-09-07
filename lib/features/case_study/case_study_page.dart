@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/constants/app_constants.dart';
 import '../../core/responsive/responsive_layout.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/projects/project_repository.dart';
@@ -37,6 +38,7 @@ class CaseStudyPage extends StatelessWidget {
     final projectIndexStr = projectIndexInt < 10 ? '0$projectIndexInt' : '$projectIndexInt';
 
     final isMobile = ResponsiveLayout.isMobile(context);
+    final sectionGap = isMobile ? AppConstants.sectionGapMobile : AppConstants.sectionGapDesktop;
 
     return PageScaffold(
       currentPath: '/work/$slug',
@@ -51,29 +53,27 @@ class CaseStudyPage extends StatelessWidget {
             projectIndex: projectIndexStr,
           ),
 
-          const SizedBox(height: 36.0),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 2. VERIFIED METADATA BAR
           // -----------------------------------------------------------
           CaseStudyMeta(project: project),
 
-          const SizedBox(height: 48.0),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          const SizedBox(height: 48.0),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 3. STRUCTURED CASE STUDY SECTIONS (01 - 07)
           // -----------------------------------------------------------
-          ..._buildCaseStudySections(project, isMobile),
+          ..._buildCaseStudySections(context, project, isMobile, sectionGap),
 
           // If no deep-dive sections exist beyond overview, show Documentation In Progress
           if (_isDocumentationPending(project)) ...[
             DocumentationInProgress(projectTitle: project.shortTitle),
-            const SizedBox(height: 48.0),
+            SizedBox(height: sectionGap),
           ],
-
-          const SizedBox(height: 48.0),
 
           // -----------------------------------------------------------
           // 4. BIDIRECTIONAL NAVIGATION FOOTER
@@ -101,7 +101,8 @@ class CaseStudyPage extends StatelessWidget {
   }
 
   /// Builds canonical case study sections adhering strictly to verified data.
-  List<Widget> _buildCaseStudySections(Project project, bool isMobile) {
+  List<Widget> _buildCaseStudySections(
+      BuildContext context, Project project, bool isMobile, double sectionGap) {
     final widgets = <Widget>[];
 
     void addSection({
@@ -113,7 +114,7 @@ class CaseStudyPage extends StatelessWidget {
     }) {
       widgets.add(
         Padding(
-          padding: const EdgeInsets.only(bottom: 64.0),
+          padding: EdgeInsets.only(bottom: sectionGap),
           child: isMobile
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -253,17 +254,24 @@ class CaseStudyPage extends StatelessWidget {
     // 06 / Design Showcase
     final designShowcase = project.getSection(CaseStudySectionType.designShowcase);
     if (designShowcase != null) {
+      // Omit cover photo if it's already shown as the hero visual at the top of the case study
+      final showcaseImages = designShowcase.images
+          .where((img) => img != project.heroImage && img != project.thumbnail)
+          .toList();
+
       addSection(
         index: '06',
         title: designShowcase.title,
         description: designShowcase.description,
         content: designShowcase.content,
-        visualContent: CaseStudyShowcaseSlot(
-          title: project.shortTitle,
-          slotType: designShowcase.showcaseType ?? ShowcaseSlotType.fullWidth,
-          caption: designShowcase.caption,
-          images: designShowcase.images,
-        ),
+        visualContent: showcaseImages.isNotEmpty
+            ? CaseStudyShowcaseSlot(
+                title: project.shortTitle,
+                slotType: designShowcase.showcaseType ?? ShowcaseSlotType.fullWidth,
+                caption: designShowcase.caption,
+                images: showcaseImages,
+              )
+            : null,
       );
     }
 
@@ -281,7 +289,114 @@ class CaseStudyPage extends StatelessWidget {
       );
     }
 
+    // If project has confidential design files under NDA, show full-width card with Contact Me action
+    if (project.isDesignConfidential) {
+      widgets.add(
+        Padding(
+          padding: EdgeInsets.only(bottom: sectionGap),
+          child: _buildConfidentialDesignCard(context, project, isMobile),
+        ),
+      );
+    }
+
     return widgets;
+  }
+
+  /// Builds an editorial confidential card explaining NDA status and offering a Contact Me button.
+  Widget _buildConfidentialDesignCard(
+      BuildContext context, Project project, bool isMobile) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(isMobile ? 18.0 : 32.0),
+      decoration: BoxDecoration(
+        color: AppTheme.surfaceRaised,
+        borderRadius: BorderRadius.circular(AppConstants.radiusMedium),
+        border: Border.all(color: AppTheme.border, width: 1.0),
+        boxShadow: AppTheme.cardShadow,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(7.0),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF2EFEB),
+                  borderRadius: BorderRadius.circular(100.0),
+                  border: Border.all(color: AppTheme.border),
+                ),
+                child: const Icon(
+                  Icons.lock_outline_rounded,
+                  size: 14.0,
+                  color: AppTheme.foregroundMuted,
+                ),
+              ),
+              const SizedBox(width: 10.0),
+              Flexible(
+                child: Text(
+                  'CONFIDENTIAL DESIGN FILES & SYSTEM SPECS',
+                  style: AppTheme.sectionIndex.copyWith(
+                    letterSpacing: 0.6,
+                    fontSize: isMobile ? 10.5 : 11.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16.0),
+          Text(
+            'Design Files Protected Under NDA',
+            style: isMobile ? AppTheme.h3 : AppTheme.h2,
+          ),
+          const SizedBox(height: 10.0),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 720.0),
+            child: Text(
+              'Detailed Figma prototypes, user flow maps, component design systems, and interaction specs for ${project.title} are protected under confidentiality agreements with ${project.company ?? 'the organization'}. Private design walkthroughs and portfolio demonstrations can be scheduled upon request.',
+              style: AppTheme.body.copyWith(
+                color: AppTheme.foregroundMuted,
+                height: 1.6,
+              ),
+            ),
+          ),
+          const SizedBox(height: 22.0),
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => context.go('/contact'),
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? 14.0 : 22.0,
+                  vertical: isMobile ? 9.0 : 11.0,
+                ),
+                decoration: BoxDecoration(
+                  color: AppTheme.primary,
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.mail_outline_rounded, size: 14.0, color: Colors.white),
+                    const SizedBox(width: 6.0),
+                    Text(
+                      isMobile ? 'Contact Me to View' : 'Contact Me to View Design Files',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: isMobile ? 12.0 : 13.0,
+                      ),
+                    ),
+                    const SizedBox(width: 5.0),
+                    const Icon(Icons.arrow_forward_rounded, size: 13.0, color: Colors.white),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _buildNotFoundState(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/constants/app_constants.dart';
 import '../../core/responsive/responsive_layout.dart';
 import '../../core/theme/app_theme.dart';
 import '../../data/experience/experience_data.dart';
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
     final currentRole = ExperienceData.productDesignExperiences.first;
     final topSkills = SkillsData.primaryCategories.take(2).toList();
     final isMobile = ResponsiveLayout.isMobile(context);
-    final sectionGap = isMobile ? 36.0 : 52.0;
+    final sectionGap = isMobile ? AppConstants.sectionGapMobile : AppConstants.sectionGapDesktop;
 
     return PageScaffold(
       currentPath: '/',

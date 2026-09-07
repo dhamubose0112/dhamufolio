@@ -158,7 +158,7 @@ class ContactPage extends StatelessWidget {
                     const SizedBox(height: 16.0),
                     _buildInfoBentoCard(
                       title: 'LinkedIn',
-                      value: 'dhamubose',
+                      value: 'dhamubose01',
                       actionLabel: 'View Profile',
                       iconAsset: 'assets/icons/linkedin_icon.png',
                       onTap: contact.linkedInUrl != null
@@ -168,7 +168,7 @@ class ContactPage extends StatelessWidget {
                     const SizedBox(height: 16.0),
                     _buildInfoBentoCard(
                       title: 'GitHub',
-                      value: 'dhamubose',
+                      value: 'dhamubose0112',
                       actionLabel: 'View Repositories',
                       iconAsset: 'assets/icons/github_icon.png',
                       onTap: contact.gitHubUrl != null
@@ -205,7 +205,7 @@ class ContactPage extends StatelessWidget {
                       Expanded(
                         child: _buildInfoBentoCard(
                           title: 'LinkedIn',
-                          value: 'dhamubose',
+                          value: 'dhamubose01',
                           actionLabel: 'View Profile',
                           iconAsset: 'assets/icons/linkedin_icon.png',
                           onTap: contact.linkedInUrl != null
@@ -221,7 +221,7 @@ class ContactPage extends StatelessWidget {
                       Expanded(
                         child: _buildInfoBentoCard(
                           title: 'GitHub',
-                          value: 'dhamubose',
+                          value: 'dhamubose0112',
                           actionLabel: 'View Repositories',
                           iconAsset: 'assets/icons/github_icon.png',
                           onTap: contact.gitHubUrl != null
@@ -246,9 +246,9 @@ class ContactPage extends StatelessWidget {
             },
           ),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // 04 — CLOSING NOTE & RETURN NAVIGATION

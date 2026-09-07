@@ -78,9 +78,9 @@ class CapabilitiesPage extends StatelessWidget {
 
           _buildCapabilitiesGrid(primaryCategories, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // SUPPORTING DISCIPLINES & WORKFLOWS (2-COLUMN GRID)
@@ -104,9 +104,9 @@ class CapabilitiesPage extends StatelessWidget {
 
           _buildCapabilitiesGrid(supportingCategories, isMobile),
 
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
           const Divider(),
-          SizedBox(height: sectionGap),
+          SizedBox(height: sectionGap / 2),
 
           // -----------------------------------------------------------
           // SELECTED WORK CTA (Uniform Bento Card)

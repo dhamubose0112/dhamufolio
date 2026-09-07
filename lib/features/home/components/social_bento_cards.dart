@@ -29,7 +29,7 @@ class EmailBentoCard extends StatelessWidget {
 
   const EmailBentoCard({
     super.key,
-    this.email = 'dhamubose2407@gmail.com',
+    this.email = 'dhamu.bose01@gmail.com',
   });
 
   @override
@@ -95,7 +95,7 @@ class LinkedInBentoCard extends StatelessWidget {
 
   const LinkedInBentoCard({
     super.key,
-    this.url = 'https://www.linkedin.com/in/dhamubose/',
+    this.url = 'https://www.linkedin.com/in/dhamubose01/',
   });
 
   @override
@@ -141,7 +141,7 @@ class LinkedInBentoCard extends StatelessWidget {
             ),
             const SizedBox(height: 2.0),
             Text(
-              '/in/dhamubose',
+              '/in/dhamubose01',
               style: AppTheme.caption.copyWith(
                 fontSize: 10.5,
                 color: AppTheme.foregroundSubtle,
@@ -161,7 +161,7 @@ class GithubBentoCard extends StatelessWidget {
 
   const GithubBentoCard({
     super.key,
-    this.url = 'https://github.com/dhamubose',
+    this.url = 'https://github.com/dhamubose0112',
   });
 
   @override
@@ -207,7 +207,7 @@ class GithubBentoCard extends StatelessWidget {
             ),
             const SizedBox(height: 2.0),
             Text(
-              'github.com/dhamubose',
+              'github.com/dhamubose0112',
               style: AppTheme.caption.copyWith(
                 fontSize: 10.5,
                 color: AppTheme.foregroundSubtle,
@@ -227,7 +227,7 @@ class TwitterBentoCard extends StatelessWidget {
 
   const TwitterBentoCard({
     super.key,
-    this.url = 'https://x.com/dhamubose',
+    this.url = 'https://x.com/dhamubose01',
   });
 
   @override
@@ -264,7 +264,7 @@ class TwitterBentoCard extends StatelessWidget {
             ),
             const SizedBox(height: 2.0),
             Text(
-              '@dhamubose',
+              '@dhamubose01',
               style: AppTheme.caption.copyWith(
                 fontSize: 10.5,
                 color: AppTheme.foregroundSubtle,

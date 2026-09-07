@@ -29,8 +29,8 @@ class AppConstants {
   static const double spacing160 = 160.0;
 
   // Standardized Section Vertical Rhythm
-  static const double sectionGapMobile = 72.0;
-  static const double sectionGapDesktop = 112.0;
+  static const double sectionGapMobile = 36.0;
+  static const double sectionGapDesktop = 52.0;
 
   // Hero composition constants
   static const double heroDesktopMinHeight = 520.0;
