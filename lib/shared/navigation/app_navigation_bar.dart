@@ -54,16 +54,19 @@ class AppNavigationBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // 1. Left: Brand Logo ("designer dhamu")
-              MouseRegion(
-                cursor: SystemMouseCursors.click,
-                onEnter: (_) => CursorState.instance.setHovered(true),
-                onExit: (_) => CursorState.instance.setHovered(false),
-                child: GestureDetector(
-                  onTap: () => context.go('/'),
-                  child: Image.asset(
-                    'assets/logo/dhamu_logo.png',
-                    height: isCompact ? 30.0 : 36.0,
-                    fit: BoxFit.contain,
+              Flexible(
+                fit: FlexFit.loose,
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  onEnter: (_) => CursorState.instance.setHovered(true),
+                  onExit: (_) => CursorState.instance.setHovered(false),
+                  child: GestureDetector(
+                    onTap: () => context.go('/'),
+                    child: Image.asset(
+                      'assets/logo/dhamu_logo.png',
+                      height: isCompact ? 28.0 : 36.0,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ),
@@ -75,7 +78,7 @@ class AppNavigationBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const _ResumeButton(isCompact: true),
-                    const SizedBox(width: 10.0),
+                    const SizedBox(width: 8.0),
                     Container(
                       decoration: BoxDecoration(
                         color: AppTheme.surfaceRaised,
@@ -377,7 +380,7 @@ class _ResumeButtonState extends State<_ResumeButton> {
     if (resumeUrl != null && resumeUrl.isNotEmpty) {
       final uri = Uri.parse(resumeUrl);
       if (await canLaunchUrl(uri)) {
-        await launchUrl(uri);
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
         return;
       }
     }

@@ -13,7 +13,8 @@ class ContactData {
     gitHubUrl: 'https://github.com/dhamubose0112',
     twitterUrl: 'https://x.com/dhamubose01',
     portfolioUrl: null,
-    resumeUrl: null,
+    resumeUrl:
+        'https://drive.google.com/drive/folders/1YOxDT40ZJXKhTqnWvIn6fWfXT9f-vcgb?usp=sharing',
     availabilityStatus: 'Open for Product Design & UI/UX opportunities',
   );
 }
